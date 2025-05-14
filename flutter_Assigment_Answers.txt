@@ -1,0 +1,105 @@
+1. What are the key differences between StatelessWidget and StatefulWidget?
+Feature	StatelessWidget	StatefulWidget
+State Management	Immutable; UI doesn’t change dynamically.	Maintains state across widget rebuilds.
+Rebuild	Rebuilt only when parent changes.	Can trigger rebuild using setState().
+Use Case	For static content (e.g., icons, text).	For dynamic content (e.g., form input, animations).
+Lifecycle	Simple lifecycle.	More complex with initState(), dispose(), etc.
+
+2. Explain the role of FutureBuilder and StreamBuilder in Flutter.
+FutureBuilder:
+
+Used for asynchronous operations that return a single future result.
+
+Rebuilds the widget tree based on the Future’s state (waiting, done, etc.).
+
+Example use case: Fetching data from an API.
+
+StreamBuilder:
+
+Used to work with a continuous stream of data/events.
+
+Rebuilds the widget tree every time a new event is emitted.
+
+Example use case: Realtime updates like chat messages or sensor data.
+
+3. What state management approaches have you used and why?
+Commonly used approaches:
+
+Provider: Lightweight and widely recommended by Flutter team. Good for small to medium apps.
+
+Riverpod: More robust and scalable; solves limitations of Provider (e.g., accessing providers outside widget tree).
+
+Bloc (Business Logic Component): Strong separation of UI and business logic; good for larger, more structured apps.
+
+setState: Useful for simple local state needs within a single widget.
+
+Why:
+
+For small apps: Provider or setState is enough.
+
+For medium to large apps: Riverpod or Bloc offers better scalability and testability.
+
+4. How do you handle responsiveness in Flutter for multiple screen sizes?
+Approaches:
+
+MediaQuery: Get device dimensions dynamically.
+
+LayoutBuilder: Builds widgets based on the constraints of the parent.
+
+Flexible & Expanded Widgets: For dynamic allocation of space in rows/columns.
+
+FittedBox, AspectRatio: For aspect control and scaling.
+
+Flutter’s ResponsiveFramework or Sizer packages: For easier scaling and layout adaptation.
+
+OrientationBuilder: Handle landscape/portrait mode adjustments.
+
+Best practice: Combine MediaQuery and LayoutBuilder for responsive and adaptive UIs.
+
+5. What is the use of pubspec.yaml and what kind of dependencies should it include?
+pubspec.yaml is the configuration file for a Flutter project.
+
+Includes:
+
+Project metadata: Name, description, version.
+
+Dependencies:
+
+Regular dependencies: Libraries used in the app (e.g., http, provider, flutter_bloc).
+
+Dev dependencies: Tools used for development/testing only (e.g., build_runner, mockito).
+
+Assets: Images, fonts, JSON files.
+
+Environment constraints: SDK versions required.
+
+Scripts (optional): For build automation.
+
+6. Describe the Flutter build process and how you optimize performance.
+Flutter Build Process:
+
+Widget Tree Creation: Starts with main() and builds widget tree.
+
+Element Tree: Connects widgets to a rendered output.
+
+Render Tree: Determines layout, size, and paint operations.
+
+Compositing & Painting: Final UI is drawn on the screen.
+
+Performance Optimization Techniques:
+
+Use const constructors to reduce rebuilds.
+
+Avoid unnecessary rebuilds using keys, selectors, or ValueNotifier.
+
+Use ListView.builder for large lists.
+
+Cache images using cached_network_image.
+
+Minimize widget depth—flatten widget tree.
+
+Use RepaintBoundary for complex animations.
+
+Avoid heavy operations in build methods—use async initialization (initState or FutureBuilder).
+
+Profile using Flutter DevTools.
